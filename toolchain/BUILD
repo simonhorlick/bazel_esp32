@@ -17,7 +17,7 @@ filegroup(
         ":cc_wrapper",
         ":xtensa-esp32-elf-ar",
         ":xtensa-esp32-elf-ld",
-        "@esp32_toolchain//:sources",
+        "@arduino_esp32//:sources",
         "@xtensa_esp32_elf_linux64//:compiler_pieces",
     ],
 )

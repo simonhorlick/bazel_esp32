@@ -8,6 +8,8 @@
 
 exports_files(["cores/esp32/main.cpp"])
 
+exports_files(glob(["**"]), visibility = ["//visibility:public"],)
+
 filegroup(
     name = "sources",
     srcs = glob(["**"]),

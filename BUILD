@@ -1,11 +1,11 @@
 cc_binary(
     name = "hello",
-    srcs = ["@esp32_toolchain//:cores/esp32/main.cpp"],  # main must depend on the library containing setup and loop.
+    srcs = ["@arduino_esp32//:cores/esp32/main.cpp"],  # main must depend on the library containing setup and loop.
     visibility = ["//visibility:public"],
     deps = [
         ":hello_lib",
-        "@esp32_toolchain//:core_c_lib",
-        "@esp32_toolchain//:core_lib",
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
     ],
 )
 
@@ -19,14 +19,14 @@ genrule(
     name = "gen_image",
     srcs = [":hello"],
     outs = ["hello.bin"],
-    tools = ["@esp32_toolchain//:esptool.py"],
-    cmd = "python $(location @esp32_toolchain//:esptool.py) --chip esp32 elf2image --flash_mode dio --flash_freq 80m --flash_size 4MB -o \"$@\" \"$<\"",
+    tools = ["@arduino_esp32//:esptool.py"],
+    cmd = "python $(location @arduino_esp32//:esptool.py) --chip esp32 elf2image --flash_mode dio --flash_freq 80m --flash_size 4MB -o \"$@\" \"$<\"",
 )
 
 genrule(
     name = "gen_partitions",
     srcs = [],
     outs = ["hello.partitions.bin"],
-    tools = ["@esp32_toolchain//:gen_esp32part.py"],
-    cmd = "python $(location @esp32_toolchain//:gen_esp32part.py) /home/simon/.arduino15/packages/esp32/hardware/esp32/2.0.0-alpha1/tools/partitions/min_spiffs.csv \"$@\"",
+    tools = ["@arduino_esp32//:gen_esp32part.py", "@arduino_esp32//:tools/partitions/min_spiffs.csv"],
+    cmd = "python $(location @arduino_esp32//:gen_esp32part.py) $(location @arduino_esp32//:tools/partitions/min_spiffs.csv) \"$@\"",
 )
