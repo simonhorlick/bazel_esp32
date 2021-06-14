@@ -13,8 +13,6 @@ filegroup(name = "empty")
 
 cc_toolchain(
     name = "xtensa_toolchain",
-    toolchain_identifier = "xtensa-toolchain",
-    toolchain_config = ":xtensa_toolchain_config",
     all_files = ":empty",
     compiler_files = ":empty",
     dwp_files = ":empty",
@@ -22,6 +20,8 @@ cc_toolchain(
     objcopy_files = ":empty",
     strip_files = ":empty",
     supports_param_files = 0,
+    toolchain_config = ":xtensa_toolchain_config",
+    toolchain_identifier = "xtensa-toolchain",
 )
 
 cc_toolchain_config(name = "xtensa_toolchain_config")
