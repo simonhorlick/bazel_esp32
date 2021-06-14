@@ -8,6 +8,12 @@
 
 exports_files(["cores/esp32/main.cpp"])
 
+filegroup(
+    name = "sources",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
 cc_library(
     name = "core_lib",
     srcs = glob(["cores/esp32/**/*.h"]) + [

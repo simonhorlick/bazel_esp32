@@ -11,14 +11,29 @@ cc_toolchain_suite(
 
 filegroup(name = "empty")
 
-filegroup(name = "cc_wrapper", srcs=["cc_wrapper.sh"])
+filegroup(
+    name = "all_files",
+    srcs = [
+        ":cc_wrapper",
+        ":xtensa-esp32-elf-ar",
+        ":xtensa-esp32-elf-ld",
+        "@esp32_toolchain//:sources",
+        "@xtensa_esp32_elf_linux64//:compiler_pieces",
+    ],
+)
+
+filegroup(
+    name = "cc_wrapper",
+    srcs = ["cc_wrapper.sh"],
+)
 
 cc_toolchain(
     name = "xtensa_toolchain",
-    all_files = ":empty",
-    compiler_files = ":cc_wrapper",
+    all_files = ":all_files",
+    ar_files = ":all_files",
+    compiler_files = ":all_files",
     dwp_files = ":empty",
-    linker_files = ":cc_wrapper",
+    linker_files = ":all_files",
     objcopy_files = ":empty",
     strip_files = ":empty",
     supports_param_files = 0,

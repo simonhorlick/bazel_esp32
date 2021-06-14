@@ -1,11 +1,11 @@
 cc_binary(
     name = "hello",
+    srcs = ["@esp32_toolchain//:cores/esp32/main.cpp"],  # main must depend on the library containing setup and loop.
     visibility = ["//visibility:public"],
-    srcs = ["@esp32_toolchain//:cores/esp32/main.cpp"], # main must depend on the library containing setup and loop.
     deps = [
         ":hello_lib",
-        "@esp32_toolchain//:core_lib",
         "@esp32_toolchain//:core_c_lib",
+        "@esp32_toolchain//:core_lib",
     ],
 )
 
