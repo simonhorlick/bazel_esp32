@@ -11,12 +11,14 @@ cc_toolchain_suite(
 
 filegroup(name = "empty")
 
+filegroup(name = "cc_wrapper", srcs=["cc_wrapper.sh"])
+
 cc_toolchain(
     name = "xtensa_toolchain",
     all_files = ":empty",
-    compiler_files = ":empty",
+    compiler_files = ":cc_wrapper",
     dwp_files = ":empty",
-    linker_files = ":empty",
+    linker_files = ":cc_wrapper",
     objcopy_files = ":empty",
     strip_files = ":empty",
     supports_param_files = 0,
