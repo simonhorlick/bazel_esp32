@@ -19,12 +19,14 @@ genrule(
     name = "gen_image",
     srcs = [":hello"],
     outs = ["hello.bin"],
-    cmd = "python /home/simon/.arduino15/packages/esp32/tools/esptool_py/3.0.0/esptool.py --chip esp32 elf2image --flash_mode dio --flash_freq 80m --flash_size 4MB -o \"$@\" \"$<\"",
+    tools = ["@esp32_toolchain//:esptool.py"],
+    cmd = "python $(location @esp32_toolchain//:esptool.py) --chip esp32 elf2image --flash_mode dio --flash_freq 80m --flash_size 4MB -o \"$@\" \"$<\"",
 )
 
 genrule(
     name = "gen_partitions",
     srcs = [],
     outs = ["hello.partitions.bin"],
-    cmd = "python /home/simon/.arduino15/packages/esp32/hardware/esp32/2.0.0-alpha1/tools/gen_esp32part.py /home/simon/.arduino15/packages/esp32/hardware/esp32/2.0.0-alpha1/tools/partitions/min_spiffs.csv \"$@\"",
+    tools = ["@esp32_toolchain//:gen_esp32part.py"],
+    cmd = "python $(location @esp32_toolchain//:gen_esp32part.py) /home/simon/.arduino15/packages/esp32/hardware/esp32/2.0.0-alpha1/tools/partitions/min_spiffs.csv \"$@\"",
 )

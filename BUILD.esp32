@@ -14,6 +14,18 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "gen_esp32part.py",
+    srcs = ["tools/gen_esp32part.py"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "esptool.py",
+    srcs = ["tools/esptool.py"],
+    visibility = ["//visibility:public"],
+)
+
 cc_library(
     name = "core_lib",
     srcs = glob(["cores/esp32/**/*.h"]) + [
