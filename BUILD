@@ -12,6 +12,9 @@ cc_binary(
 cc_library(
     name = "hello_lib",
     srcs = ["hello.cc"],
+    deps = [
+        "@arduino_esp32//:SPI",
+    ],
     visibility = ["//visibility:public"],
 )
 
