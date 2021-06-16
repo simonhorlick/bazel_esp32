@@ -162,8 +162,8 @@ COMPILER_CPP_FLAGS = [
 
 COMPILER_C_ELF_FLAGS = [
     "-nostdlib",
-    "-L%{COMPILER_SDK_PATH}/lib",
-    "-L%{COMPILER_SDK_PATH}/ld",
+    "-L" + COMPILER_SDK_PATH + "/lib",
+    "-L" + COMPILER_SDK_PATH + "/ld",
     "-T",
     "esp32_out.ld",
     "-T",
