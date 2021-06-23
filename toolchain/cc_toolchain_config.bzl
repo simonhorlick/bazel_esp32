@@ -102,6 +102,11 @@ COMPILER_CPREPROCESSOR_FLAGS = [
     "-DHAVE_CONFIG_H",
     "-DGCC_NOT_5_2_0=0",
     "-DWITH_POSIX",
+    "-D_POSIX_TIMERS",
+    # time.h doesn't define these by default, so set them to something sane.
+    # This is required for Abseil's time handling.
+    "-D__TM_GMTOFF=__tm_gmtoff",
+    "-D__TM_ZONE=__tm_zone",
 ] + ["-I" + COMPILER_SDK_PATH + "/" + p for p in INCLUDE_DIRS] + [
     "-I" + RUNTIME_PLATFORM_PATH + "/cores/esp32",
     "-I" + RUNTIME_PLATFORM_PATH + "/variants/esp32",
