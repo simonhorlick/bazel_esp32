@@ -40,6 +40,116 @@ cc_library(
 # Bundled libraries
 
 cc_library(
+    name = "BLE",
+    srcs = glob(["libraries/BLE/src/**"]),
+    hdrs = [
+        "libraries/BLE/src/BLEDevice.h",
+        "libraries/BLE/src/BLEUtils.h",
+        "libraries/BLE/src/BLEScan.h",
+        "libraries/BLE/src/BLEAdvertisedDevice.h",
+        ],
+    includes = ["libraries/BLE/src"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
+    ],
+)
+
+cc_library(
+    name = "BluetoothSerial",
+    srcs = ["libraries/BluetoothSerial/src/BluetoothSerial.cpp"],
+    hdrs = ["libraries/BluetoothSerial/src/BluetoothSerial.h"],
+    includes = ["libraries/BluetoothSerial/src"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
+    ],
+)
+
+cc_library(
+    name = "DNSServer",
+    srcs = glob(["libraries/DNSServer/src/**"]),
+    hdrs = ["libraries/DNSServer/src/DNSServer.h"],
+    includes = ["libraries/DNSServer/src"],
+    visibility = ["//visibility:public"],
+    deps = [":WiFi"],
+)
+
+cc_library(
+    name = "EEPROM",
+    srcs = glob(["libraries/EEPROM/src/**"]),
+    hdrs = ["libraries/EEPROM/src/EEPROM.h"],
+    includes = ["libraries/EEPROM/src"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "ESPmDNS",
+    srcs = glob(["libraries/ESPmDNS/src/**"]),
+    hdrs = ["libraries/ESPmDNS/src/ESPmDNS.h"],
+    includes = ["libraries/ESPmDNS/src"],
+    visibility = ["//visibility:public"],
+    deps = [":WiFi"],
+)
+
+cc_library(
+    name = "FFat",
+    srcs = ["libraries/FFat/src/FFat.cpp"],
+    hdrs = ["libraries/FFat/src/FFat.h"],
+    includes = ["libraries/FFat/src"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
+    ],
+)
+
+cc_library(
+    name = "FS",
+    srcs = glob(["libraries/FS/src/**"]),
+    hdrs = ["libraries/FS/src/FS.h"],
+    includes = ["libraries/FS/src"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "HTTPClient",
+    srcs = ["libraries/HTTPClient/src/HTTPClient.cpp"],
+    hdrs = ["libraries/HTTPClient/src/HTTPClient.h"],
+    includes = ["libraries/HTTPClient/src"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
+    ],
+)
+
+cc_library(
+    name = "HTTPUpdate",
+    srcs = ["libraries/HTTPUpdate/src/HTTPUpdate.cpp"],
+    hdrs = ["libraries/HTTPUpdate/src/HTTPUpdate.h"],
+    includes = ["libraries/HTTPUpdate/src"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
+    ],
+)
+
+cc_library(
+    name = "HTTPUpdateServer",
+    hdrs = ["libraries/HTTPUpdateServer/src/HTTPUpdateServer.h"],
+    includes = ["libraries/HTTPUpdateServer/src"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
+    ],
+)
+
+cc_library(
     name = "SPI",
     srcs = ["libraries/SPI/src/SPI.cpp"],
     hdrs = ["libraries/SPI/src/SPI.h"],
@@ -52,12 +162,22 @@ cc_library(
 )
 
 cc_library(
-    name = "Wire",
-    srcs = ["libraries/Wire/src/Wire.cpp"],
-    hdrs = ["libraries/Wire/src/Wire.h"],
-    includes = ["libraries/Wire/src"],
+    name = "Update",
+    srcs = glob(["libraries/Update/src/**"]),
+    hdrs = ["libraries/Update/src/Update.h"],
+    includes = ["libraries/Update/src"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "WebServer",
+    srcs = glob(["libraries/WebServer/src/**"]),
+    hdrs = ["libraries/WebServer/src/WebServer.h"],
+    includes = ["libraries/WebServer/src"],
     visibility = ["//visibility:public"],
     deps = [
+        ":FS",
+        ":WiFi",
         "@arduino_esp32//:core_c_lib",
         "@arduino_esp32//:core_lib",
     ],
@@ -89,57 +209,13 @@ cc_library(
 )
 
 cc_library(
-    name = "Update",
-    srcs = glob(["libraries/Update/src/**"]),
-    hdrs = ["libraries/Update/src/Update.h"],
-    includes = ["libraries/Update/src"],
-    visibility = ["//visibility:public"],
-)
-
-cc_library(
-    name = "EEPROM",
-    srcs = glob(["libraries/EEPROM/src/**"]),
-    hdrs = ["libraries/EEPROM/src/EEPROM.h"],
-    includes = ["libraries/EEPROM/src"],
-    visibility = ["//visibility:public"],
-)
-
-cc_library(
-    name = "ESPmDNS",
-    srcs = glob(["libraries/ESPmDNS/src/**"]),
-    hdrs = ["libraries/ESPmDNS/src/ESPmDNS.h"],
-    includes = ["libraries/ESPmDNS/src"],
-    visibility = ["//visibility:public"],
-    deps = [":WiFi"],
-)
-
-cc_library(
-    name = "FS",
-    srcs = glob(["libraries/FS/src/**"]),
-    hdrs = ["libraries/FS/src/FS.h"],
-    includes = ["libraries/FS/src"],
-    visibility = ["//visibility:public"],
-)
-
-cc_library(
-    name = "WebServer",
-    srcs = glob(["libraries/WebServer/src/**"]),
-    hdrs = ["libraries/WebServer/src/WebServer.h"],
-    includes = ["libraries/WebServer/src"],
+    name = "Wire",
+    srcs = ["libraries/Wire/src/Wire.cpp"],
+    hdrs = ["libraries/Wire/src/Wire.h"],
+    includes = ["libraries/Wire/src"],
     visibility = ["//visibility:public"],
     deps = [
-        ":FS",
-        ":WiFi",
         "@arduino_esp32//:core_c_lib",
         "@arduino_esp32//:core_lib",
     ],
-)
-
-cc_library(
-    name = "DNSServer",
-    srcs = glob(["libraries/DNSServer/src/**"]),
-    hdrs = ["libraries/DNSServer/src/DNSServer.h"],
-    includes = ["libraries/DNSServer/src"],
-    visibility = ["//visibility:public"],
-    deps = [":WiFi"],
 )
