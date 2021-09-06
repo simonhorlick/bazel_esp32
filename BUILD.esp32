@@ -43,11 +43,11 @@ cc_library(
     name = "BLE",
     srcs = glob(["libraries/BLE/src/**"]),
     hdrs = [
-        "libraries/BLE/src/BLEDevice.h",
-        "libraries/BLE/src/BLEUtils.h",
-        "libraries/BLE/src/BLEScan.h",
         "libraries/BLE/src/BLEAdvertisedDevice.h",
-        ],
+        "libraries/BLE/src/BLEDevice.h",
+        "libraries/BLE/src/BLEScan.h",
+        "libraries/BLE/src/BLEUtils.h",
+    ],
     includes = ["libraries/BLE/src"],
     visibility = ["//visibility:public"],
     deps = [
@@ -156,6 +156,19 @@ cc_library(
     includes = ["libraries/SPI/src"],
     visibility = ["//visibility:public"],
     deps = [
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
+    ],
+)
+
+cc_library(
+    name = "SPIFFS",
+    srcs = ["libraries/SPIFFS/src/SPIFFS.cpp"],
+    hdrs = ["libraries/SPIFFS/src/SPIFFS.h"],
+    includes = ["libraries/SPIFFS/src"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@arduino_esp32//:FS",
         "@arduino_esp32//:core_c_lib",
         "@arduino_esp32//:core_lib",
     ],
