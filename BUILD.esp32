@@ -150,6 +150,18 @@ cc_library(
 )
 
 cc_library(
+    name = "Preferences",
+    srcs = ["libraries/Preferences/src/Preferences.cpp"],
+    hdrs = ["libraries/Preferences/src/Preferences.h"],
+    includes = ["libraries/Preferences/src"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@arduino_esp32//:core_c_lib",
+        "@arduino_esp32//:core_lib",
+    ],
+)
+
+cc_library(
     name = "SPI",
     srcs = ["libraries/SPI/src/SPI.cpp"],
     hdrs = ["libraries/SPI/src/SPI.h"],
