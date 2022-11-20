@@ -11,3 +11,8 @@ build:esp32 --cpu=xtensa
 
 build:esp32 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
+# TODO(https://github.com/simonhorlick/bazel_esp32/issues/4):
+# The way toolchain resolution works in this repo should be migrated per
+# https://github.com/bazelbuild/bazel/issues/7260
+build:esp32 --incompatible_enable_cc_toolchain_resolution=false
+build --incompatible_enable_cc_toolchain_resolution=false
