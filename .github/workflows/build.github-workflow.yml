@@ -1,0 +1,23 @@
+name: Bazel build
+run-name: Bazel build triggered by ${{ github.actor }}
+on: [push]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      - name: Build and test workspace targets
+        run: |
+          pip install pyserial
+          bazel build --config=esp32 //...
+      # - name: Build and test @arduino_esp32//...
+      #   run: |
+      #     bazel build --config=esp32 --keep_going @arduino_esp32//...
+      #     bazel test --config=esp32  --keep_going @arduino_esp32//...
+      # - run: echo "This job's status is ${{ job.status }}."
